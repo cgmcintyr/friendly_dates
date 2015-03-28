@@ -70,7 +70,7 @@ def friendlify(start_date, end_date):
         part2  = custom_strftime('{S} %B, %Y', end_date)
         return(part1 + " - " + part2)
 
-def Main():
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("start_date", 
                         help="starting date for the time interval in form DD-MM-YYYY"
@@ -79,9 +79,8 @@ def Main():
                         help="ending date for the time interval in form DD-MM-YYYY"
                         )
     args= parser.parse_args()
-
-    print(friendlify(date1, date2))
+    print(friendlify(args.start_date, args.end_date))
 
 if __name__ == '__main__':
-    Main()
+    main()
 
