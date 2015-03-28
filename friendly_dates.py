@@ -5,12 +5,8 @@ def string_to_datetime(date_string):
     """
     Converts string in format DD-MM-YYYY to a datetime.datetime object.
     """
-    try:
-        date = datetime.datetime.strptime(date_string, "%d-%m-%Y")
-        return(date)
-    except ValueError:
-        print("ValueError: '{0}' is not a valid 'dd-mm-yyyy' date.".format(date_string))
-        quit()
+    date = datetime.datetime.strptime(date_string, "%d-%m-%Y")
+    return(date)
 
 def check_interval(start_date, end_date):
     """
@@ -19,11 +15,9 @@ def check_interval(start_date, end_date):
         2) They are not the same day
     """
     if start_date > end_date:
-        print("Error: start date is after end date.")
-        quit()
+        raise ValueError("Start date is after end date.")
     elif start_date == end_date:
-        print("Error: time interval must be one day or longer.")
-        quit()
+        raise ValueError("Time interval must be one day or longer.")
 
 def day_with_suffix(day):
     """
@@ -35,6 +29,9 @@ def day_with_suffix(day):
     return(str(day) + suffix)    
 
 def custom_strftime(format, date):
+    """
+    Custom implementation of datetime.strftime() to add suffix to the day of the month.
+    """
     day = day_with_suffix(date.day)
     return(date.strftime(format).replace('{S}', day))
 
@@ -43,9 +40,16 @@ def friendlify(start_date, end_date):
     """
     Returns interval of given dates in a human friendly format.
 
-    input: datetime.datetime or datetime.date objects
+    input: two dates either as strings in DD-MM-YYYY format, 
+           or as a datetime.datetime objects.
     ouput: string
     """
+    
+    if type(start_date) == str:
+        start_date = string_to_datetime(start_date)
+    if type(end_date) == str:
+        end_date = string_to_datetime(end_date)
+
     check_interval(start_date, end_date)
 
     if start_date.year == end_date.year:
@@ -76,14 +80,8 @@ def Main():
                         )
     args= parser.parse_args()
 
-    date1 = string_to_datetime(args.start_date)
-    date2 = string_to_datetime(args.end_date)
-
-    print(dateify(date1, date2))
-
-    
+    print(friendlify(date1, date2))
 
 if __name__ == '__main__':
     Main()
-
 
