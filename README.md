@@ -8,7 +8,7 @@ the form "D-M-YYYY", or python datetime.datetime objects. They can be a
 mixture of both (e.g. the starting date is a string, ending date is a 
 datetime.datetime object).
 
-Importing friendly_dates:
+Importing:
 
     >>> from friendly_dates import friendlify
 

@@ -15,7 +15,6 @@ def check_valid_input(start_date, end_date):
     """
     start_is_valid_str = False
     end_is_valid_str   = False
-
     start_type = type(start_date)
     end_type   = type(end_date)
     
@@ -26,7 +25,7 @@ def check_valid_input(start_date, end_date):
         end_date = string_to_datetime(end_date)
         end_is_valid_str = True
     
-    if isinstance(start_type, datetime.datetime) or isinstance(start_type, datetime.date):
+    if isinstance(start_date, datetime.datetime) or isinstance(start_date, datetime.date):
         pass
     elif start_is_valid_str == False:
         raise TypeError(
@@ -36,7 +35,7 @@ def check_valid_input(start_date, end_date):
     if end_date == None:
         # Start date is valid, no end date given.
         return(start_date, end_date) 
-    elif isinstance(end_type, datetime.datetime) or isinstance(end_type, datetime.date):
+    elif isinstance(end_date, datetime.datetime) or isinstance(end_date, datetime.date):
         pass
     elif end_is_valid_str == False:
         raise TypeError(
